@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/001-create-books-table.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/002-alter-books-table-for-json.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/003-insert-sample-books.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/004-add-active-column-to-users-table.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/005-add-active-column-to-books-table.yaml
+      relativeToChangelogFile: false

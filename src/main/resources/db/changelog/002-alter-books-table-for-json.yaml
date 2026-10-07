@@ -1,0 +1,105 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-add-book-category
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+        - not:
+            - columnExists:
+                tableName: books
+                columnName: category
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: category
+                  type: VARCHAR(100)
+                  defaultValue: 'Fiction'
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 003-add-book-isbn
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+        - not:
+            - columnExists:
+                tableName: books
+                columnName: isbn
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: isbn
+                  type: VARCHAR(20)
+                  defaultValue: ''
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 004-add-book-available
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+        - not:
+            - columnExists:
+                tableName: books
+                columnName: available
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: available
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 005-add-book-accent
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+        - not:
+            - columnExists:
+                tableName: books
+                columnName: accent
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: accent
+                  type: VARCHAR(50)
+                  defaultValue: 'blue'
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 006-backfill-book-json-fields
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+      changes:
+        - sql:
+            sql: |
+              UPDATE books
+              SET category = COALESCE(category, 'Fiction'),
+                  isbn = COALESCE(isbn, ''),
+                  available = COALESCE(available, TRUE),
+                  accent = COALESCE(accent, 'blue')
+              WHERE category IS NULL OR isbn IS NULL OR available IS NULL OR accent IS NULL;

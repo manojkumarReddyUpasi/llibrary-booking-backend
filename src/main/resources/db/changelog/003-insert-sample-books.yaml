@@ -1,0 +1,154 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-insert-sample-books
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: '0'
+            sql: "SELECT COUNT(*) FROM books"
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: title
+                  value: The Night Circus
+              - column:
+                  name: author
+                  value: Erin Morgenstern
+              - column:
+                  name: category
+                  value: Fiction
+              - column:
+                  name: isbn
+                  value: 9780385534635
+              - column:
+                  name: available
+                  valueBoolean: true
+              - column:
+                  name: accent
+                  value: coral
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: title
+                  value: Tomorrow, and Tomorrow, and Tomorrow
+              - column:
+                  name: author
+                  value: Gabrielle Zevin
+              - column:
+                  name: category
+                  value: Fiction
+              - column:
+                  name: isbn
+                  value: 9780593321201
+              - column:
+                  name: available
+                  valueBoolean: true
+              - column:
+                  name: accent
+                  value: gold
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: title
+                  value: The Creative Act
+              - column:
+                  name: author
+                  value: Rick Rubin
+              - column:
+                  name: category
+                  value: Design
+              - column:
+                  name: isbn
+                  value: 9780593652886
+              - column:
+                  name: available
+                  valueBoolean: false
+              - column:
+                  name: accent
+                  value: blue
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 4
+              - column:
+                  name: title
+                  value: Atomic Habits
+              - column:
+                  name: author
+                  value: James Clear
+              - column:
+                  name: category
+                  value: Personal growth
+              - column:
+                  name: isbn
+                  value: 9780735211292
+              - column:
+                  name: available
+                  valueBoolean: true
+              - column:
+                  name: accent
+                  value: green
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 5
+              - column:
+                  name: title
+                  value: Pachinko
+              - column:
+                  name: author
+                  value: Min Jin Lee
+              - column:
+                  name: category
+                  value: Fiction
+              - column:
+                  name: isbn
+                  value: 9781455563937
+              - column:
+                  name: available
+                  valueBoolean: true
+              - column:
+                  name: accent
+                  value: plum
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 6
+              - column:
+                  name: title
+                  value: The Design of Everyday Things
+              - column:
+                  name: author
+                  value: Don Norman
+              - column:
+                  name: category
+                  value: Design
+              - column:
+                  name: isbn
+                  value: 9780465050659
+              - column:
+                  name: available
+                  valueBoolean: true
+              - column:
+                  name: accent
+                  value: teal

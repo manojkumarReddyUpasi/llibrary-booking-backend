@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-active-column-to-users-table
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: users
+        - not:
+            - columnExists:
+                tableName: users
+                columnName: active
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

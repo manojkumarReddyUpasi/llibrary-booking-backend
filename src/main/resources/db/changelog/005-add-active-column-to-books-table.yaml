@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-add-active-column-to-books-table
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+        - not:
+            - columnExists:
+                tableName: books
+                columnName: active
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: active
+                  type: BOOLEAN
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
