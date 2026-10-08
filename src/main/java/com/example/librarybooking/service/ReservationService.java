@@ -9,4 +9,5 @@ public interface ReservationService {
     Reservation insertReservation(ReservationDto reservationDto);
     void deleteReservation(Long id);
     List<Reservation> getAllReservations();
+    Reservation updateReservation(Long reservationId, ReservationDto reservationDto);
 }

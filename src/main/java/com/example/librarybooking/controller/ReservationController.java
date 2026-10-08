@@ -24,6 +24,14 @@ public class ReservationController {
         return reservationService.insertReservation(reservationDto);
     }
 
+
+    @PutMapping("/reservations/{id}")
+    public Reservation updateReservation(@PathVariable Long id, @RequestBody ReservationDto reservationDto) {
+        return reservationService.updateReservation(id, reservationDto);
+    }
+
+
+
     @GetMapping("/reservations")
     public List<Reservation> getAllReservations() {
         return reservationService.getAllReservations();

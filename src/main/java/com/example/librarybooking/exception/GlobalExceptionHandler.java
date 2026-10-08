@@ -18,6 +18,24 @@ import java.util.regex.Pattern;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidCredentials(InvalidCredentialsException ex,
+                                                                      HttpServletRequest request) {
+        return buildErrorResponse(HttpStatus.UNAUTHORIZED,
+                "Unauthorized",
+                ex.getMessage(),
+                request.getRequestURI());
+    }
+
+    @ExceptionHandler(ReservationStateException.class)
+    public ResponseEntity<ApiErrorResponse> handleReservationState(ReservationStateException ex,
+                                                                    HttpServletRequest request) {
+        return buildErrorResponse(HttpStatus.CONFLICT,
+                "Conflict",
+                ex.getMessage(),
+                request.getRequestURI());
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleResourceNotFound(ResourceNotFoundException ex,
                                                                   HttpServletRequest request) {
