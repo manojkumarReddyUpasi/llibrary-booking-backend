@@ -11,7 +11,8 @@ public class ReservationDto {
     private LocalDate returnDate;
     private LocalDate dueDate;
     private Reservation.ReservationStatus status;
-//getters and setters
+//getters and setters\
+
     public Long getUserId() {
         return userId;
     }
