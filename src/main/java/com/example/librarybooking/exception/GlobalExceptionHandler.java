@@ -27,6 +27,12 @@ public class GlobalExceptionHandler {
                 request.getRequestURI());
     }
 
+    @ExceptionHandler(DuplicateResourceException.class)
+    public ResponseEntity<ApiErrorResponse> handleDuplicate(DuplicateResourceException ex,
+                                                            HttpServletRequest request) {
+        return buildErrorResponse(HttpStatus.CONFLICT, "Conflict", ex.getMessage(), request.getRequestURI());
+    }
+
     @ExceptionHandler(ReservationStateException.class)
     public ResponseEntity<ApiErrorResponse> handleReservationState(ReservationStateException ex,
                                                                     HttpServletRequest request) {
