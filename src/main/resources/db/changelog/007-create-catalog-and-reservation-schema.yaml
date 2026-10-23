@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-add-book-count-column
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: books
+        - not:
+            - columnExists:
+                tableName: books
+                columnName: book_count
+      changes:
+        - addColumn:
+            tableName: books
+            columns:
+              - column:
+                  name: book_count
+                  type: INT
+                  defaultValueNumeric: 1
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 010-create-reservations-table
+      author: copilot
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: reservations
+      changes:
+        - createTable:
+            tableName: reservations
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_reservations_user
+                    references: users(id)
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_reservations_book
+                    references: books(id)
+              - column:
+                  name: issue_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: return_date
+                  type: DATE
+              - column:
+                  name: due_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false

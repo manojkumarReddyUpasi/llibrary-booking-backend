@@ -14,3 +14,9 @@ databaseChangeLog:
   - include:
       file: classpath:db/changelog/005-add-active-column-to-books-table.yaml
       relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/006-create-auth-tables.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/007-create-catalog-and-reservation-schema.yaml
+      relativeToChangelogFile: false
