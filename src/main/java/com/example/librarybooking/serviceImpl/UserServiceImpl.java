@@ -10,6 +10,7 @@ import com.example.librarybooking.repository.RoleRepository;
 import com.example.librarybooking.repository.UserRepository;
 import com.example.librarybooking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -27,12 +28,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public User insertUser(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setActive(userDto.getActive() != null ? userDto.getActive() : true);
         if (userDto.getRoles() != null && !userDto.getRoles().isEmpty()) {
             Set<Role> roles = userDto.getRoles().stream()
@@ -72,7 +76,6 @@ public class UserServiceImpl implements UserService {
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
-        userDto.setPassword(user.getPassword());
         userDto.setActive(user.getActive());
         if (user.getRoles() != null) {
             userDto.setRoles(user.getRoles().stream()
@@ -89,7 +92,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         if (userDto.getPassword() != null) {
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         }
         if (userDto.getActive() != null) {
             user.setActive(userDto.getActive());
@@ -110,7 +113,6 @@ public class UserServiceImpl implements UserService {
         updatedUserDto.setId(user.getId());
         updatedUserDto.setName(user.getName());
         updatedUserDto.setEmail(user.getEmail());
-        updatedUserDto.setPassword(user.getPassword());
         updatedUserDto.setActive(user.getActive());
         updatedUserDto.setRoles(user.getRoles().stream().map(role -> new RoleDto(role.getId(), role.getName())).collect(Collectors.toSet()));
         return updatedUserDto;

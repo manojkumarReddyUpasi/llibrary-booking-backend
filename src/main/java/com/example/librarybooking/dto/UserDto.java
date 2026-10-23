@@ -1,5 +1,7 @@
 package com.example.librarybooking.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +9,7 @@ public class UserDto {
     private Long id;
     private String name;
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private Set<RoleDto> roles = new HashSet<>();
     private String status;
@@ -130,7 +133,6 @@ public class UserDto {
         this.roles = roleNames != null ? roleNames : new HashSet<>();
     }
 }
-
 
 
 
