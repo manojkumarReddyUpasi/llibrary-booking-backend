@@ -53,19 +53,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> getUserList() {
-        return userRepository.findAll();
+        return userRepository.findAllWithRoles();
     }
 
     @Override
     public List<ActiveUserDto> getActiveUsers() {
-        return userRepository.findByActiveTrue().stream()
-                .map(user -> new ActiveUserDto(
-                        user.getId(),
-                        user.getName(),
-                        user.getEmail(),
-                        user.getActive()
-                ))
-                .collect(Collectors.toList());
+        return userRepository.findActiveUserDtos();
     }
 
     @Override
